@@ -45,6 +45,10 @@ public class ScriptwrapperInstallationNodeView
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	}
 
+	public void enableTextArea(boolean isEnabled) {
+		scriptTextArea.setEnabled(isEnabled);
+	}
+
 	private void selectFile(final ScriptwrapperInstallationNodeContribution contribution) {
 
 		JFileChooser fileChooser = openFileChooser();
@@ -189,9 +193,11 @@ public class ScriptwrapperInstallationNodeView
 		enableButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean isEnabled = enableButton.getText().equals("Enable");
+				// boolean isEnabled = contribution.getEnabledStatus();
+				boolean isEnabled = enableButton.getText().startsWith("Enable");
 				contribution.setEnabled(isEnabled);
-				enableButton.setText(isEnabled ? "Disable" : "Enable");
+				enableTextArea(isEnabled);
+				enableButton.setText(isEnabled ? "Disable" : "Enable ");
 			}
 		});
 
@@ -241,7 +247,7 @@ public class ScriptwrapperInstallationNodeView
 		if (b) {
 			enableButton.setText("Disable");
 		} else {
-			enableButton.setText("Enable");
+			enableButton.setText("Enable ");
 		}
 	}
 

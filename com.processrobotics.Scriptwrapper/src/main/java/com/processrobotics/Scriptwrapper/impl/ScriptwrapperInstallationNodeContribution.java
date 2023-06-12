@@ -23,14 +23,19 @@ public class ScriptwrapperInstallationNodeContribution implements InstallationNo
     @Override
     public void openView() {
 		view.updateEnabledButton(getEnabledStatus());
+		view.enableTextArea(getEnabledStatus());
         view.setScriptText(getSelectedFilePath());
     }
 
-    private boolean getEnabledStatus() {
+    public boolean getEnabledStatus() {
 		return model.get(ENABLED_KEY, false);
 	}
 
-	private String getSelectedFilePath() {
+	public void setEnabled(boolean isEnabled) {
+        model.set(ENABLED_KEY, isEnabled);
+    }
+
+	public String getSelectedFilePath() {
 		return model.get(SELECTED_FILE_PATH_KEY, "");
 	}
 
@@ -48,7 +53,7 @@ public class ScriptwrapperInstallationNodeContribution implements InstallationNo
     public void generateScript(ScriptWriter writer) {
         // Called to generate the script for the installation node
 
-        boolean isEnabled = model.get(ENABLED_KEY, false);
+        boolean isEnabled = getEnabledStatus();
         if (isEnabled) {
             String selectedFilePath = model.get(SELECTED_FILE_PATH_KEY, "");
             if (!selectedFilePath.isEmpty()) {
@@ -66,12 +71,17 @@ public class ScriptwrapperInstallationNodeContribution implements InstallationNo
         }
     }
 
-    public void setEnabled(boolean isEnabled) {
-        model.set(ENABLED_KEY, isEnabled);
-    }
-
     public void setSelectedFilePath(String selectedFilePath) {
 		System.out.println("Selected file path: " + selectedFilePath);
         model.set(SELECTED_FILE_PATH_KEY, selectedFilePath);
     }
+
+	public void getSelectedFilePath(String selectedFilePath) {
+		System.out.println("Selected file path: " + selectedFilePath);
+		model.set(SELECTED_FILE_PATH_KEY, selectedFilePath);
+	}
+
+	public void setScriptText(String scriptText) {
+		view.setScriptText(scriptText);
+	}
 }
