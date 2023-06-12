@@ -2,7 +2,7 @@
 
 A simple URCap for contributing a common script to all programs saved with the associated Installation file.
 
-![Alt text](image.png)
+![Alt text](img/image.png)
 
 A large, scroll-able, text area is provided for script file review and editing. 
 
